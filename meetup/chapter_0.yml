@@ -1,0 +1,11 @@
+---
+header:
+  author: Daniel Wallace
+  title: Writing SaltStack Modules
+  description: Introduction to writing your first saltstack modules.
+
+slides:
+  -
+    - nested:
+      -
+        - h1: Writing SaltStack Modules

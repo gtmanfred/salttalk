@@ -1,0 +1,35 @@
+---
+header:
+  author: Daniel Wallace
+  title: Writing SaltStack Modules
+  description: Introduction to writing your first saltstack modules.
+
+slides:
+  -
+    - nested:
+      -
+        - h1: Introduction
+
+      -
+        - h1: Daniel Wallace
+        - p: Linux System Administrator L3 in SMB Hybrid.
+
+      -
+        - h2: Devops
+        - p: Used and written modules for
+        - ul:
+          - SaltStack
+          - Chef
+          - Ansible
+
+      -
+        - h2: Contribution list
+        - ul:
+          - glusterfs
+          - apacheconf
+          - nova driver
+          - pyrax
+          - ansible roster
+          - cloud pillars
+          - unless and onlyif
+          - various fixes
