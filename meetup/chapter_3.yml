@@ -1,0 +1,72 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: State Modules
+
+      -
+        - h3: special values
+        - ul:
+            - __salt__
+            - __pillar__
+            - __grains__
+            - __context__
+            - __opts__
+
+      -
+        - h3: Still has __virtual__
+        - code: |
+            salt/states/glusterfs_state.py
+
+            __virtualname__ = 'glusterfs'
+
+
+            def __virtual__():
+                if 'glusterfs' in __salt__:
+                    return __virtualname__
+                return False
+
+      -
+        - h3: return structure for success
+        - code: |
+            ret = {
+                'name': name,
+                'result': True,
+                'comment': 'Thing already set',
+                'changes': {},
+            }
+
+      -
+        - : __opt__['test']
+        - h3: make sure to include test
+
+      -
+        - h3: touch a file
+        - code: |
+            import os
+            def touch(name, makedirs=False):
+                ret = {'name': name, 'result': False, 'comment': 'Failed to create file', 'changes': {}}
+                name = os.path.expanduser(name)
+                if os.path.exists(name):
+                    ret.update({
+                        'comment': 'File exists.',
+                        'result': True
+                    })
+                    return ret
+                elif __opts__['test']:
+                    ret.update({
+                        'comment': 'File set to be created.',
+                        'result': None
+                    })
+                    return ret
+                if makedirs:
+                     __salt__['file.makedirs'](name)
+                ret['result'] = __salt__['file.touch'](name)
+                if ret['result']:
+                    ret['changes']['new'] = name
+                    ret['comment'] = 'File created.'
+                else:
+                    ret['comment'] = 'Failed to create file.'
+                return ret
+

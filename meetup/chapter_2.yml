@@ -29,3 +29,9 @@ slides:
                 if __grains__['os'] in ('Arch', 'Arch ARM'):
                     return __virtualname__
                 return False
+
+      -
+        - h3: testing modules
+        - ul:
+            - /srv/salt/_modules
+            - "extension_modules: srv/modules"
