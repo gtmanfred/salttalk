@@ -38,8 +38,8 @@ slides:
             }
 
       -
-        - : __opt__['test']
-        - h3: make sure to include test
+        - h1: __opt__['test']
+        - p: make sure to include test
 
       -
         - h3: touch a file
