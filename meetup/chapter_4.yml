@@ -1,0 +1,25 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: Runner Module
+
+      -
+        - h3: state orchestrate
+        - code: |
+              def orchestrate(mods, saltenv='base', test=None, exclude=None, pillar=None):
+                  if pillar is not None and not isinstance(pillar, dict):
+                      raise SaltInvocationError(
+                          'Pillar data must be formatted as a dictionary'
+                      )
+                  __opts__['file_client'] = 'local'
+                  minion = salt.minion.MasterMinion(__opts__)
+                  running = minion.functions['state.sls'](
+                      mods,
+                      saltenv,
+                      test,
+                      exclude,
+                      pillar=pillar)
+                  ret = {minion.opts['id']: running}
+                  return ret
