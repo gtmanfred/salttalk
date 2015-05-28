@@ -18,3 +18,14 @@ slides:
 
             def __virtual__():
                 return HAS_NOVACLIENT
+
+      -
+        - h3: alternative name
+        - p: Using __virtualname__
+        - code: |
+            salt/modules/pacman
+            __virtualname__ = 'pkg'
+            def __virtual__():
+                if __grains__['os'] in ('Arch', 'Arch ARM'):
+                    return __virtualname__
+                return False
