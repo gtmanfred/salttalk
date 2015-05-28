@@ -1,0 +1,51 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: Beacon And Engines Modules
+
+      -
+        - h3: What?
+        - ul:
+            - new in 2015.5
+            - Beacons monitor minions
+            - Engines monitor masters
+            - send events to the master reactor
+
+      -
+        - h3: check the mysql slave
+        - code: |
+            salt/beacon/slave_lag_beacon.py
+            __virtualname__ = 'slave_lag'
+            def __virtual__():
+                if salt.utils.is_windows():
+                    return False
+                else:
+                    return __virtualname__
+            def beacon(config):
+                log.trace('slave_lag beacon starting')
+                lag = __salt__['mysql.slave_lag']()
+                if lag > config['max_lag'] or lag < 0:
+                    return [{'lag': lag, 'name': __salt__['grains.get']('fqdn')}]
+                return [{}]
+
+      -
+        - h3: config beacon
+        - code: |
+            /srv/pillar/beacon.sls
+            beacons:
+              - slave_lag:
+                  max: 100
+
+      -
+        - h3: reactor
+        - code: |
+            {% if 'lag' in data['data'] %}
+            fix replication:
+              runner.state.orch:
+                - mods: mysql.fix_replication
+                - pillar: 
+                    badminion: {{data['data']['name']}}
+            {% endif %}
+
