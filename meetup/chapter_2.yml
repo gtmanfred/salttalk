@@ -1,0 +1,20 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: Execution Modules
+
+      -
+        - h3: Enabling modules
+        - p: Using __virtual__
+        - code: |
+            try:
+                import novaclient
+                HAS_NOVACLIENT = True
+            except ImportError as exc:
+                HAS_NOVACLIENT = False
+
+
+            def __virtual__():
+                return HAS_NOVACLIENT
