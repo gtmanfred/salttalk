@@ -6,6 +6,13 @@ slides:
         - h1: Runner Module
 
       -
+        - h3: How are they different
+        - ul:
+            - run from the master
+            - no dunder dictionaries
+            - use the salt api clients
+
+      -
         - h3: state orchestrate
         - code: |
               def orchestrate(mods, saltenv='base', test=None, exclude=None, pillar=None):
@@ -23,3 +30,15 @@ slides:
                       pillar=pillar)
                   ret = {minion.opts['id']: running}
                   return ret
+      -
+        - h3: use the reactor
+        - code: |
+            /srv/reactor/orchestrate.sls
+            run a webhook:
+              runner.state.orchestrate:
+                - name: deploy
+        - code: |
+            /etc/salt/master.d/reactor.conf
+            reactor:
+              - 'salt/netapi/hook/deploy':
+                - /srv/reactor/orchestrate.sls
