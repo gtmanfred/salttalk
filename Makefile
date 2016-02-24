@@ -1,5 +1,6 @@
-SHELL := /bin/bash
+SHELL := /bin/zsh
 BUILD_DIR=$(HOME)/github/salttalk
+PYTHON=$(HOME)/.pyenv/shims/python
 
 build: revelator link_reveal build_slides
 
@@ -22,16 +23,16 @@ link_reveal:
 
 build_slides:
 	echo "-------- Looping over folders --------"; \
-	for i in 'meetup' ; do \
+	for i in meetup/*(/) ; do \
 		echo -------- Syntax Check $$i --------; \
-		python $(BUILD_DIR)/syntax_check.py $(BUILD_DIR)/$$i/*.yml; \
+		$(PYTHON) $(BUILD_DIR)/syntax_check.py $(BUILD_DIR)/$$i/*.yml; \
 		echo -------- Creating output folder for $$i --------; \
 		mkdir -p output/$$i; \
 		echo -------- Build Single on $$i --------; \
-		python $(BUILD_DIR)/build_single.py $(BUILD_DIR)/$$i > $$i_comp.yml; \
+		$(PYTHON) $(BUILD_DIR)/build_single.py $(BUILD_DIR)/$$i > $$i_comp.yml; \
 		echo -------- Generating Slides on $$i --------; \
-		python revelator/write_it $$i_comp.yml output/$$i; \
+		$(PYTHON) revelator/write_it $$i_comp.yml output/$$i; \
     	echo "-------- Hacking stylesheets for $$i --------"; \
-		sed -e '32s/#eeeeee/#000000/' -i output/$$i/css/theme/default.css; \
-		sed -e '49s/#eeeeee/#000000/' -i output/$$i/css/theme/default.css; \
+		sed -ie '32s/#eeeeee/#000000/' output/$$i/css/theme/default.css; \
+		sed -ie '49s/#eeeeee/#000000/' output/$$i/css/theme/default.css; \
     done

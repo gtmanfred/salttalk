@@ -13,4 +13,3 @@ for yml in sys.argv[1:]:
         print '%s: Syntax OK' % yml
 
 sys.exit(exit)
-
