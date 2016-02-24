@@ -1,0 +1,14 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: Repo
+        - p: https://github.com/gtmanfred/openstack-salt-states
+
+      -
+        - h2: openstack/openstack-salt
+        - p: https://github.com/openstack/openstack-salt
+
+      -
+        - h1: Questions? Comments?
