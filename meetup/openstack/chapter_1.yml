@@ -1,0 +1,22 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: Introduction
+
+      -
+        - h2: Me
+        - p: Daniel Wallace
+        - ul:
+          - Company -> Rackspace
+          - Title -> Software Developer 2
+          - Team -> Managed Cloud Postbuild Automation
+
+      -
+        - h2: Me ... pt2
+        - p: Daniel Wallace
+        - ul:
+          - Company -> SaltStack Inc.
+          - Title -> Software Engineer
+          - Team -> Ruling the Internet of Things!

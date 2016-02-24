@@ -1,0 +1,22 @@
+---
+slides:
+  -
+    - nested:
+      -
+        - h1: The Salt Runner
+
+      -
+        - h3: What is it?
+        - ul:
+          - salt-run
+          - execution modules run on the master
+
+      -
+        - h3: Examples
+        - ul:
+          - salt-run manage.status
+          - salt-run fileserver.clear_cache backend=git
+          - salt-run fileserver.envs
+          - salt-run pillar.show_top 'salt.manfred.io'
+          - salt-run cache.mine 'salt.manfred.io'
+          - salt-run cache.clear_mine '*'

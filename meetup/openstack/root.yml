@@ -1,0 +1,11 @@
+---
+header:
+  author: Daniel Wallace
+  title: 0 to Openstack with one command using Salt
+  description: |
+    Using the salt runner to deploy an entire openstack cluster
+slides:
+  - set_global:
+     transition: rotate
+     background: 'white'
+
